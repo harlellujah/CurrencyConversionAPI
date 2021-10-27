@@ -22,6 +22,12 @@ namespace CurrencyConversion.Business.ApiManagement
 
         private Dictionary<string, string> parameters;
 
+        // JH - For unit tests
+        public ApiService(AppSettings appSettings)
+        {
+            this._appSettings = appSettings;
+        }
+
         public ApiService(IOptions<AppSettings> appSettings)
         {
             this._appSettings = appSettings.Value;
