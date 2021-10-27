@@ -76,27 +76,6 @@ namespace CurrencyConversion.Business.ApiManagement
             request.Accept = "application/json";
         }
 
-        // JH - I wrote this generic deserialization method before I found out fixer.io free was no good
-        private T GetResponse<T>()
-        {
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            {
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    using (Stream stream = response.GetResponseStream())
-                    {
-                        using (StreamReader reader = new StreamReader(stream))
-                        {
-                            string responseFromServer = reader.ReadToEnd();
-                            return JsonSerializer.Deserialize<T>(responseFromServer);
-                        }
-                    }
-                }
-
-                throw new Exception(response.StatusDescription);
-            }
-        }
-
         private string GetResponse()
         {
             using (var response = (HttpWebResponse)request.GetResponse())
